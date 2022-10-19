@@ -42,6 +42,6 @@ public class Solution {
 //        head = new ListNode(1, new ListNode(2, new ListNode(3)));
 
         TreeNode ans = q109.sortedListToBST(head);
-        q109.inOrder(ans);
+//        q109.inOrder(ans);
     }
 }
