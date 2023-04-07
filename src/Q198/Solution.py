@@ -22,16 +22,17 @@ class Solution:
     Total amount you can rob = 2 + 9 + 1 = 12.
     """
 
-    # Attempt 1: Time Limit Exceeded
-    def robz(self, nums: List[int]) -> int:
-        if len(nums) == 0:
-            return 0
+    # Attempt 3: Refactored
+    def rob(self, nums: List[int]) -> int:
         if len(nums) <= 2:
             return max(nums)
-        return max(nums[0] + self.rob(nums[2:]), nums[1] + self.rob(nums[3:]))
+        nums[1] = max(nums[0], nums[1])
+        for i in range(2, len(nums)):
+            nums[i] = max(nums[i] + nums[i - 2], nums[i - 1])
+        return nums[len(nums) - 1]
 
     # Attempt 2: Using Dynamic Programming
-    def rob(self, nums: List[int]) -> int:
+    def rob2(self, nums: List[int]) -> int:
         prev1 = 0
         prev2 = 0
         for n in nums:
@@ -40,8 +41,17 @@ class Solution:
             prev2 = max(temp, prev2)
         return prev2
 
+    # Attempt 1: Time Limit Exceeded
+    def rob1(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return 0
+        if len(nums) <= 2:
+            return max(nums)
+        return max(nums[0] + self.rob(nums[2:]), nums[1] + self.rob(nums[3:]))
+
 
 if __name__ == '__main__':
     s = Solution()
     print(s.rob([1, 2, 3, 1]))
     print(s.rob([2, 7, 9, 3, 1]))
+    print(s.rob([2, 1, 1, 2, 1, 1, 5]))
