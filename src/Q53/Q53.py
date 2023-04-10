@@ -19,11 +19,15 @@ class Solution:
     """
 
     def maxSubArray(self, nums: List[int]) -> int:
+        for i in range(1, len(nums)):
+            if nums[i - 1] + nums[i] > nums[i]:
+                nums[i] += nums[i - 1]
+        return max(nums)
+    def maxSubArray1(self, nums: List[int]) -> int:
         maxSum = nums[0]
         for i in range(1, len(nums)):
             nums[i] = max(nums[i], nums[i] + nums[i - 1])
             maxSum = max(maxSum, nums[i])
-        print(nums)
         return maxSum
 
 
@@ -31,3 +35,7 @@ if __name__ == '__main__':
     s = Solution()
     print(s.maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
     print(s.maxSubArray([5, 4, -1, 7, 8]))
+    print(s.maxSubArray([1]))
+    print(s.maxSubArray1([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+    print(s.maxSubArray1([5, 4, -1, 7, 8]))
+    print(s.maxSubArray1([1]))
