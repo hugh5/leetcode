@@ -2,3 +2,4 @@ out/
 .idea/
 *.iml
 /venv/
+.DS_STORE
